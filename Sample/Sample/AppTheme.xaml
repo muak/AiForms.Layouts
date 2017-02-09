@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		x:Class="Sample.Resources.AppTheme">
+	<!-- アプリ全体の背景色 -->
+	<Color x:Key="AppBackground">#f2f6ff</Color>
+	<!-- メインカラー ボタンの表面とか -->
+	<Color x:Key="MainColor">#5c92ff</Color>
+	<!-- アクセントカラー ナビバーやSlider・Switchの色 -->
+	<Color x:Key="AccentColor">#2455b3</Color>
+	<!-- 通常文字色 -->
+	<Color x:Key="BaseTextColor">#808080</Color>
+	<!-- ボタンとかの文字色 -->
+	<Color x:Key="ObjectTextColor">#FFFFFF</Color>
+	<!-- 通常フォントサイズ -->
+	<x:Double x:Key="BaseFontSize">14</x:Double>
+	<!-- ボタンとかのフォントサイズ -->
+	<x:Double x:Key="ObjectFontSize">28</x:Double>
+</ResourceDictionary>

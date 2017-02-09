@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		xmlns:theme="clr-namespace:Sample.Resources;assembly=Sample"
+		MergedWith="theme:AppTheme"
+		x:Class="Sample.Resources.OtherTheme">
+	<Color x:Key="AppBackground">#f6fff2</Color>
+	<Color x:Key="MainColor">#8bd859</Color>
+	<Color x:Key="AccentColor">#56b226</Color>
+</ResourceDictionary>

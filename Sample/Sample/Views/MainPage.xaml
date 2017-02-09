@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		xmlns:w="clr-namespace:AiForms.Layouts;assembly=AiForms.Layouts"
+		xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" 
+		prism:ViewModelLocator.AutowireViewModel="True" 
+		x:Class="Sample.Views.MainPage" Title=""
+		>
+	
+	<StackLayout Spacing="10" Margin="10" Padding="10" >
+		<w:WrapLayout  Spacing="4" Margin="10" Padding="0"
+				UniformColumns="5" IsSquare="true"
+				BackgroundColor="Silver"  HorizontalOptions="FillAndExpand">
+			<BoxView Color="Aqua"    HeightRequest="100"  WidthRequest="100" IsVisible="false" />
+			<BoxView Color="Black"   HeightRequest="50" WidthRequest="100" />
+			<BoxView Color="Blue"    HeightRequest="50"  WidthRequest="100" />
+			<BoxView Color="Fuchsia" HeightRequest="50"  WidthRequest="100" />
+			<BoxView Color="Maroon"  HeightRequest="50"  WidthRequest="100" />
+<!--			<BoxView Color="Green"   HeightRequest="50"  WidthRequest="100"  />-->
+		</w:WrapLayout>
+	</StackLayout>
+</ContentPage>
