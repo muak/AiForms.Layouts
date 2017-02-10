@@ -4,36 +4,41 @@
 		xmlns:w="clr-namespace:AiForms.Layouts;assembly=AiForms.Layouts"
 		xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" 
 		prism:ViewModelLocator.AutowireViewModel="True" 
-		x:Class="Sample.Views.MainPage" Title="WrapLayout"
+		BackgroundColor="White"
+		x:Class="Sample.Views.MainPage" Title="{Binding Title}"
 		>
-	
-	<StackLayout Spacing="3" Margin="10" Padding="10"  >
-		<!--<w:WrapLayout  Spacing="4" Margin="10" Padding="10"
-				UniformColumns="3" IsSquare="true"
-				BackgroundColor="Silver"  HorizontalOptions="Center">
-			<BoxView Color="Aqua"    HeightRequest="100"  WidthRequest="100" IsVisible="{Binding Visible}" />
-			<BoxView Color="Black"   HeightRequest="50" WidthRequest="100" />
-			<BoxView Color="Blue"    HeightRequest="50"  WidthRequest="100" />
-			<BoxView Color="Fuchsia" HeightRequest="50"  WidthRequest="100" />
-			<BoxView Color="Maroon"  HeightRequest="50"  WidthRequest="100" />
-			<BoxView Color="Green"   HeightRequest="50"  WidthRequest="100"  />
-		</w:WrapLayout>-->
-		<w:RepeatableWrapLayout ItemTapCommand="{Binding TapCommand}" ItemsSource="{Binding BoxList}" HorizontalOptions="Center"
-				Spacing="3" 
+	<ContentPage.ToolbarItems>
+  		<!--<ToolbarItem Text="Shuffle" Command="{Binding ShuffleCommand}" />
+		<ToolbarItem Text="Check" Command="{Binding CheckCommand}" />-->
+  	</ContentPage.ToolbarItems>
+		
+	<StackLayout Spacing="3" Margin="6" Padding="0"  >
+		<StackLayout Orientation="Horizontal" Spacing="2" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+			<Button Text="Add" Command="{Binding AddCommand}" VerticalOptions="Center" />
+			<Button Text="Del" Command="{Binding DeleteCommand}" VerticalOptions="Center" />
+			<Button Text="Rep" Command="{Binding ReplaceCommand}" VerticalOptions="Center" />
+			<Button Text="Clr" Command="{Binding ClearCommand}" VerticalOptions="Center" />
+			<Button Text="Uni" Command="{Binding ToggleUniCommand}" VerticalOptions="Center" />
+			<Label Text="Square" VerticalOptions="Center" FontSize="12" HorizontalTextAlignment="End" HorizontalOptions="FillAndExpand" />
+			<Switch IsToggled="{Binding IsSquare}" VerticalOptions="Center" HorizontalOptions="End" />
+		</StackLayout>
+		<ScrollView HorizontalOptions="FillAndExpand">
+		<w:RepeatableWrapLayout ItemTapCommand="{Binding TapCommand}" ItemsSource="{Binding BoxList}" 
+				BackgroundColor="#EEEEEE" Padding="0" Margin="4"
+				Spacing="3" UniformColumns="{Binding UniformColumns}" IsSquare="{Binding IsSquare}" 
 				>
 			<w:RepeatableWrapLayout.ItemTemplate>
 				<DataTemplate>
-					<StackLayout BackgroundColor="Silver" WidthRequest="100" Spacing="0" Padding="3">
-						<Label Text="{Binding Name}"  />
-						<BoxView Color="{Binding Color}" />
+					<StackLayout BackgroundColor="{Binding Color}" WidthRequest="{Binding Width}" HeightRequest="{Binding Height}" Spacing="0" Padding="3">
+						<Label VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+								VerticalTextAlignment="Center" HorizontalTextAlignment="Center"   
+								Text="{Binding Name}" FontSize="9" FontAttributes="Bold"
+							TextColor="{Binding Color,Converter={StaticResource BackForeConv}}"  />
 					</StackLayout>
 				</DataTemplate>
 			</w:RepeatableWrapLayout.ItemTemplate>
 		</w:RepeatableWrapLayout>
-		<Button Text="Visible ON OFF" Command="{Binding VisibleChangeCommand}" />
-		<Button Text="Clear" Command="{Binding ClearCommand}" />
-		<Button Text="Reload" Command="{Binding ReloadCommand}" />
-		<Button Text="Delete" Command="{Binding DeleteCommand}" />
-		<Button Text="Replace" Command="{Binding ReplaceCommand}" />
+		</ScrollView>
+
 	</StackLayout>
 </ContentPage>

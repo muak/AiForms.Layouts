@@ -13,24 +13,28 @@ namespace AiForms.Layouts
     /// </summary>
     public class RepeatableWrapLayout : WrapLayout
     {
-        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
-            propertyName: "ItemsSource",
-            returnType: typeof(IEnumerable),
-            declaringType: typeof(RepeatableWrapLayout),
-            defaultValue: null,
-            defaultBindingMode: BindingMode.OneWay,
-            propertyChanged: ItemsChanged);
+        public static BindableProperty ItemsSourceProperty =
+            BindableProperty.Create(
+                nameof(ItemsSource),
+                typeof(IEnumerable),
+                typeof(RepeatableWrapLayout),
+                null,
+                defaultBindingMode: BindingMode.OneWay,
+                propertyChanged: ItemsChanged
+            );
 
         public IEnumerable ItemsSource {
             get { return (IEnumerable)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
         }
 
-        public static readonly BindableProperty ItemTemplateProperty = BindableProperty.Create(
-            propertyName: "ItemTemplate",
-            returnType: typeof(DataTemplate),
-            declaringType: typeof(RepeatableWrapLayout),
-            defaultValue: default(DataTemplate));
+        public static BindableProperty ItemTemplateProperty =
+            BindableProperty.Create(
+                nameof(ItemTemplate),
+                typeof(DataTemplate),
+                typeof(RepeatableWrapLayout),
+                default(DataTemplate)
+            );
 
         public DataTemplate ItemTemplate {
             get { return (DataTemplate)GetValue(ItemTemplateProperty); }

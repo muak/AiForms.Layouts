@@ -18,7 +18,7 @@ namespace AiForms.Layouts
                 typeof(WrapLayout),
                 default(double),
                 defaultBindingMode: BindingMode.OneWay,
-                propertyChanged: (bindable, oldvalue, newvalue) => ((WrapLayout)bindable).OnSizeChanged()
+                propertyChanged: (bindable, oldvalue, newvalue) => ((WrapLayout)bindable).InvalidateMeasure()
             );
         /// <summary>
         /// Spacing added between elements
@@ -29,13 +29,14 @@ namespace AiForms.Layouts
         }
 
 
-        public static readonly BindableProperty UniformColumnsProperty =
+        public static BindableProperty UniformColumnsProperty =
             BindableProperty.Create(
-                propertyName: "UniformColumns",
-                returnType: typeof(int),
-                declaringType: typeof(WrapLayout),
-                defaultValue: default(int),
-                propertyChanged: (bindable, oldvalue, newvalue) => ((WrapLayout)bindable).OnSizeChanged()
+                nameof(UniformColumns),
+                typeof(int),
+                typeof(WrapLayout),
+                default(int),
+                defaultBindingMode: BindingMode.OneWay,
+                propertyChanged: (bindable, oldvalue, newvalue) => ((WrapLayout)bindable).InvalidateMeasure()
         );
         /// <summary>
         ///  number for uniform child width 
@@ -45,13 +46,13 @@ namespace AiForms.Layouts
             set { SetValue(UniformColumnsProperty, value); }
         }
 
-        public static readonly BindableProperty IsSquareProperty =
+        public static BindableProperty IsSquareProperty =
             BindableProperty.Create(
-                propertyName: "IsSquare",
-                returnType: typeof(bool),
-                declaringType: typeof(WrapLayout),
-                defaultValue: false,
-                propertyChanged: (bindable, oldvalue, newvalue) => ((WrapLayout)bindable).OnSizeChanged()
+                nameof(IsSquare),
+                typeof(bool),
+                typeof(WrapLayout),
+                false,
+                propertyChanged: (bindable, oldvalue, newvalue) => ((WrapLayout)bindable).InvalidateMeasure()
         );
         /// <summary>
         ///  make item height equal to item width when UniformColums > 0
@@ -61,12 +62,6 @@ namespace AiForms.Layouts
             set { SetValue(IsSquareProperty, value); }
         }
 
-
-        /// <summary>
-        /// This method is called during the measure pass of a layout cycle to get the desired size of an element.
-        /// </summary>
-        /// <param name="widthConstraint">The available width for the element to use.</param>
-        /// <param name="heightConstraint">The available height for the element to use.</param>
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
             if (WidthRequest > 0)
@@ -82,15 +77,9 @@ namespace AiForms.Layouts
 
         }
 
-        /// <summary>
-        /// Positions and sizes the children of a Layout.
-        /// </summary>
-        /// <param name="x">A value representing the x coordinate of the child region bounding box.</param>
-        /// <param name="y">A value representing the y coordinate of the child region bounding box.</param>
-        /// <param name="width">A value representing the width of the child region bounding box.</param>
-        /// <param name="height">A value representing the height of the child region bounding box.</param>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
+
             if (UniformColumns > 0) {
                 UniformMeasureAndLayout(width, height, true, x, y);
             }
@@ -101,8 +90,6 @@ namespace AiForms.Layouts
 
         private SizeRequest UniformMeasureAndLayout(double widthConstraint, double heightConstraint, bool doLayout = false, double x = 0, double y = 0)
         {
-            int rowCount = 0;
-
             double totalWidth = 0;
             double totalHeight = 0;
             double rowHeight = 0;
@@ -150,20 +137,14 @@ namespace AiForms.Layouts
                 minWidth = Math.Max(minWidth, itemWidth);
 
                 if (doLayout) {
-                    if (IsSquare) {
-                        child.HeightRequest = columsSize;
-                    }
-                    child.WidthRequest = itemWidth;
-
                     var region = new Rectangle(xPos, yPos, itemWidth, itemHeight);
                     LayoutChildIntoBoundingRegion(child, region);
                 }
 
                 xPos += itemWidth + Spacing;
 
-                if (xPos + itemWidth - x > widthConstraint) {
+                if (xPos + itemWidth + remainderAlt - x > widthConstraint) {
                     xPos = x;
-                    rowCount++;
                     yPos += rowHeight;
                     totalHeight += rowHeight;
                     rowHeight = 0;
@@ -178,7 +159,6 @@ namespace AiForms.Layouts
 
         private SizeRequest VariableMeasureAndLayout(double widthConstraint, double heightConstraint, bool doLayout = false, double x = 0, double y = 0)
         {
-            int rowCount = 0;
 
             double totalWidth = 0;
             double totalHeight = 0;
@@ -189,9 +169,20 @@ namespace AiForms.Layouts
             double xPos = x;
             double yPos = y;
 
-            foreach (var child in Children.Where(c => c.IsVisible)) {
+            var visibleChildren = Children.Where(c => c.IsVisible).Select(c => new {
+                child = c,
+                size = c.Measure(widthConstraint, heightConstraint)
+            });
 
-                var size = child.Measure(widthConstraint, heightConstraint);
+            var nextChildren = visibleChildren.Skip(1).ToList();
+            nextChildren.Add(null); //make element count same
+
+            var zipChildren = visibleChildren.Zip(nextChildren, (c, n) => new { current = c, next = n });
+
+            foreach (var childBlock in zipChildren) {
+
+                var child = childBlock.current.child;
+                var size = childBlock.current.size;
                 var itemWidth = size.Request.Width;
                 var itemHeight = size.Request.Height;
 
@@ -206,11 +197,17 @@ namespace AiForms.Layouts
                     LayoutChildIntoBoundingRegion(child, region);
                 }
 
-                xPos += itemWidth + Spacing;
+                if (childBlock.next == null) {
+                    totalHeight += rowHeight;
+                    totalWidth = Math.Max(totalWidth, rowWidth);
+                    break;
+                }
 
-                if (xPos + itemWidth - x > widthConstraint) {
+                xPos += itemWidth + Spacing;
+                var nextWitdh = childBlock.next.size.Request.Width;
+
+                if (xPos + nextWitdh - x > widthConstraint) {
                     xPos = x;
-                    rowCount++;
                     yPos += rowHeight;
                     totalHeight += rowHeight;
                     totalWidth = Math.Max(totalWidth, rowWidth);
@@ -219,15 +216,12 @@ namespace AiForms.Layouts
                 }
             }
 
-            totalWidth = Math.Max(Math.Max(totalWidth, rowWidth) - Spacing, 0);
-            totalHeight = Math.Max(totalHeight + rowHeight - Spacing, 0);
+            totalWidth = Math.Max(totalWidth - Spacing, 0);
+            totalHeight = Math.Max(totalHeight - Spacing, 0);
 
             return new SizeRequest(new Size(totalWidth, totalHeight), new Size(minWidth, minHeight));
         }
 
-        private void OnSizeChanged()
-        {
-            this.ForceLayout();
-        }
+
     }
 }
