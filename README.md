@@ -18,7 +18,7 @@ This is a collection of  Xamarin.Forms custom layouts
 Install-Package AiForms.Layouts -Pre
 ```
 
-All you need to do is installing to PCL project.
+All you need to do is installing to PCL project.<br>
 You need not to install this nuget package to each platform project.
 
 
