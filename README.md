@@ -21,7 +21,6 @@ Install-Package AiForms.Layouts -Pre
 All you need to do is installing to PCL project.<br>
 You need not to install this nuget package to each platform project.
 
-
 ## WrapLayout
 
 This Layout performs wrapping on the boundaries.

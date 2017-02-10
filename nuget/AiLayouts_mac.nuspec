@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>AiForms.Layouts</id>
+        <version>0.0.1-pre</version>
+        <title>AiForms.Layouts (WrapLayout) for Xamarin.Forms</title>
+        <authors>kamu</authors>
+        <owners>kamu</owners>
+        <projectUrl>https://github.com/muak/AiForms.Layouts</projectUrl>
+        <licenseUrl>https://github.com/muak/AiForms.Layouts/blob/master/LICENSE.txt</licenseUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Xamarin.Forms Custom Layouts(WrapLayout,RepeatableWrapLayout)</description>
+        <summary></summary>
+        <tags>Xamarin.Forms Layout WrapLayout WrapPanel Wrap Repeat ItemTemplate DataTemplate ItemSource</tags>
+        <language>en-US</language>
+        <dependencies>
+            <group targetFramework="portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10">
+                <dependency id="Xamarin.Forms" version="2.3.3" />
+            </group>
+        </dependencies>
+    </metadata>
+    <files>
+        <!-- PCL -->
+        <file src="../AiForms.Layouts/bin/Release/AiForms.Layouts.dll" target="lib/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10" />
+    </files>
+</package>
