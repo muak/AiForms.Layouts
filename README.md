@@ -12,6 +12,9 @@ This is a collection of  Xamarin.Forms custom layouts
 * [WrapLayout](#wraplayout)
 * [RepeatableWrapLayout](#repeatablewraplayout)
 
+<img src="images/1.png" width=200 /><img src="images/2.png" width=200 /><img src="images/3.png" width=200 />
+
+
 ## Demo
 
 https://twitter.com/muak_x/status/830061279330996224
@@ -19,7 +22,7 @@ https://twitter.com/muak_x/status/830061279330996224
 ## Nuget Installation
 
 ```bash
-Install-Package AiForms.Layouts -Pre
+Install-Package AiForms.Layouts
 ```
 
 All you need to do is installing to PCL project.<br>
@@ -77,25 +80,25 @@ This Layout is WrapLayout corresponding to DataTemplate.
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 		xmlns:l="clr-namespace:AiForms.Layouts;assembly=AiForms.Layouts"
 		x:Class="Sample.Views.MainPage">
-    <StackLayout>
-        <ScrollView HorizontalOptions="FillAndExpand">
-		<l:RepeatableWrapLayout
-             ItemTapCommand="{Binding TapCommand}"
-              ItemsSource="{Binding BoxList}"
-			  Spacing="3" UniformColumns="{Binding UniformColumns}"
-              IsSquare="{Binding IsSquare}" >
-			<l:RepeatableWrapLayout.ItemTemplate>
-				<DataTemplate>
-					<StackLayout BackgroundColor="{Binding Color}" >
-						<Label
-                            VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
-							Text="{Binding Name}"  />
-					</StackLayout>
-				</DataTemplate>
-			</l:RepeatableWrapLayout.ItemTemplate>
-		</l:RepeatableWrapLayout>
+	<StackLayout>
+		<ScrollView HorizontalOptions="FillAndExpand">
+			<l:RepeatableWrapLayout
+				ItemTapCommand="{Binding TapCommand}"
+				ItemsSource="{Binding BoxList}"
+				Spacing="3" UniformColumns="{Binding UniformColumns}"
+				IsSquare="{Binding IsSquare}" >
+				<l:RepeatableWrapLayout.ItemTemplate>
+					<DataTemplate>
+						<StackLayout BackgroundColor="{Binding Color}" >
+							<Label
+								VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+								Text="{Binding Name}"  />
+						</StackLayout>
+					</DataTemplate>
+				</l:RepeatableWrapLayout.ItemTemplate>
+			</l:RepeatableWrapLayout>
 		</ScrollView>
-    </StackLayout>
+	</StackLayout>
 </ContentPage>
 ```
 
