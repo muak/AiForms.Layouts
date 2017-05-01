@@ -98,18 +98,10 @@ namespace AiForms.Layouts
             double xPos = x;
             double yPos = y;
 
-            var remainder = 0;
-            var remainderAlt = 0;
-
             totalWidth = widthConstraint;
-            var exceptedWidth = (int)widthConstraint - (UniformColumns - 1) * Spacing; //excepted spacing width
+            var exceptedWidth = widthConstraint - (UniformColumns - 1) * Spacing; //excepted spacing width
 
-            // Divide remainder and put it both ends
-            remainder = (int)exceptedWidth % UniformColumns;
-            remainderAlt = remainder / 2;
-            remainder = remainder % 2 + remainderAlt;
-
-            var columsSize = (int)exceptedWidth / UniformColumns;
+            var columsSize = exceptedWidth / UniformColumns;
             if (columsSize < 1) {
                 columsSize = 1;
             }
@@ -124,13 +116,6 @@ namespace AiForms.Layouts
                     itemHeight = columsSize;
                 }
 
-                if (Math.Abs(xPos - x) <= double.Epsilon) {
-                    itemWidth += remainder;
-                }
-                if (xPos + itemWidth + Spacing > widthConstraint) {
-                    itemWidth += remainderAlt;
-                }
-
                 rowHeight = Math.Max(rowHeight, itemHeight + Spacing);
 
                 minHeight = Math.Max(minHeight, itemHeight);
@@ -143,7 +128,7 @@ namespace AiForms.Layouts
 
                 xPos += itemWidth + Spacing;
 
-                if (xPos + itemWidth + remainderAlt - x > widthConstraint) {
+                if (xPos + columsSize - x > widthConstraint) {
                     xPos = x;
                     yPos += rowHeight;
                     totalHeight += rowHeight;
@@ -221,7 +206,5 @@ namespace AiForms.Layouts
 
             return new SizeRequest(new Size(totalWidth, totalHeight), new Size(minWidth, minHeight));
         }
-
-
     }
 }
