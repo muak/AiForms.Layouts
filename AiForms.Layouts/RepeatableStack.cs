@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Specialized;
-using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace AiForms.Layouts
 {
-
     /// <summary>
-    /// WrapLayout corresponding to DataTemplate
-    /// Base Code ->  https://forums.xamarin.com/discussion/21635/xforms-needs-an-itemscontrol/p2
+    /// RepeatableStack
+    /// StackLayout corresponding to ItemsSource and ItemTemplate
     /// </summary>
-    public class RepeatableWrapLayout : WrapLayout
+    public class RepeatableStack : StackLayout
     {
         public static BindableProperty ItemsSourceProperty =
             BindableProperty.Create(
                 nameof(ItemsSource),
                 typeof(IEnumerable),
-                typeof(RepeatableWrapLayout),
+                typeof(RepeatableStack),
                 null,
                 defaultBindingMode: BindingMode.OneWay,
                 propertyChanged: ItemsChanged
@@ -32,13 +30,13 @@ namespace AiForms.Layouts
             BindableProperty.Create(
                 nameof(ItemTemplate),
                 typeof(DataTemplate),
-                typeof(RepeatableWrapLayout),
+                typeof(RepeatableStack),
                 default(DataTemplate),
                 propertyChanged: (bindable, oldValue, newValue) => {
-                    var control = (RepeatableWrapLayout)bindable;
+                    var control = (RepeatableStack)bindable;
                     //when to occur propertychanged earlier ItemsSource than ItemTemplate, raise ItemsChanged manually
-                    if(newValue != null && control.ItemsSource != null && !control.doneItemSourceChanged){
-                        ItemsChanged(bindable,null,control.ItemsSource);
+                    if (newValue != null && control.ItemsSource != null && !control.doneItemSourceChanged) {
+                        ItemsChanged(bindable, null, control.ItemsSource);
                     }
                 }
             );
@@ -48,34 +46,18 @@ namespace AiForms.Layouts
             set { SetValue(ItemTemplateProperty, value); }
         }
 
-        public static BindableProperty ItemTapCommandProperty =
-            BindableProperty.Create(
-                nameof(ItemTapCommand),
-                typeof(ICommand),
-                typeof(RepeatableWrapLayout),
-                default(ICommand),
-                defaultBindingMode: BindingMode.OneWay
-            );
-        /// <summary>
-        /// Command invoked when it tapped a item.
-        /// </summary>
-        public ICommand ItemTapCommand {
-            get { return (ICommand)GetValue(ItemTapCommandProperty); }
-            set { SetValue(ItemTapCommandProperty, value); }
-        }
-
         private bool doneItemSourceChanged = false;
 
         private static void ItemsChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var control = (RepeatableWrapLayout)bindable;
+            var control = (RepeatableStack)bindable;
             // when to occur propertychanged earlier ItemsSource than ItemTemplate, do nothing.
             if (control.ItemTemplate == null) {
                 control.doneItemSourceChanged = false;
                 return;
             }
 
-            control.doneItemSourceChanged = true; 
+            control.doneItemSourceChanged = true;
 
             IEnumerable newValueAsEnumerable;
             try {
@@ -102,12 +84,7 @@ namespace AiForms.Layouts
             if (newValueAsEnumerable != null) {
                 foreach (var item in newValueAsEnumerable) {
                     var view = control.CreateChildViewFor(item);
-                    if (control.ItemTapCommand != null) {
-                        view.GestureRecognizers.Add(new TapGestureRecognizer {
-                            Command = control.ItemTapCommand,
-                            CommandParameter = item,
-                        });
-                    }
+
                     control.Children.Add(view);
                 }
             }
@@ -118,21 +95,12 @@ namespace AiForms.Layouts
 
         private void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            var invalidate = false;
-
             if (e.Action == NotifyCollectionChangedAction.Replace) {
 
                 this.Children.RemoveAt(e.OldStartingIndex);
 
                 var item = e.NewItems[e.NewStartingIndex];
                 var view = CreateChildViewFor(item);
-
-                if (ItemTapCommand != null) {
-                    view.GestureRecognizers.Add(new TapGestureRecognizer {
-                        Command = ItemTapCommand,
-                        CommandParameter = item,
-                    });
-                }
 
                 this.Children.Insert(e.NewStartingIndex, view);
             }
@@ -142,13 +110,6 @@ namespace AiForms.Layouts
                     for (var i = 0; i < e.NewItems.Count; ++i) {
                         var item = e.NewItems[i];
                         var view = this.CreateChildViewFor(item);
-
-                        if (ItemTapCommand != null) {
-                            view.GestureRecognizers.Add(new TapGestureRecognizer {
-                                Command = ItemTapCommand,
-                                CommandParameter = item,
-                            });
-                        }
 
                         this.Children.Insert(i + e.NewStartingIndex, view);
                     }
@@ -169,11 +130,6 @@ namespace AiForms.Layouts
                 return;
             }
 
-            if (invalidate) {
-                this.UpdateChildrenLayout();
-                this.InvalidateLayout();
-            }
-
         }
 
         private View CreateChildViewFor(object item)
@@ -182,6 +138,4 @@ namespace AiForms.Layouts
             return (View)this.ItemTemplate.CreateContent();
         }
     }
-
 }
-

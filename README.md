@@ -11,6 +11,7 @@ This is a collection of  Xamarin.Forms custom layouts
 
 * [WrapLayout](#wraplayout)
 * [RepeatableWrapLayout](#repeatablewraplayout)
+* [RepeatableStack](#repeatablestack)
 
 <img src="images/1.png" width=200 /><img src="images/2.png" width=200 /><img src="images/3.png" width=200 />
 
@@ -43,7 +44,7 @@ This Layout performs wrapping on the boundaries.
 * IsSquare
     * If it is true,it make item height equal to item width when UniformColums > 0 (default false)
 
-### How to Xaml
+### How to write with Xaml
 
 ```xml
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
@@ -69,11 +70,11 @@ This Layout is WrapLayout corresponding to DataTemplate.
 ### Parameters
 
 * ItemTapCommandProperty
-    * Command invoked when it tapped a item.
-* ItemSource
+    * Command invoked when a item is tapped.
+* ItemsSource
 * ItemTemplate
 
-### How to Xaml
+### How to write with Xaml
 
 ```xml
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
@@ -100,6 +101,41 @@ This Layout is WrapLayout corresponding to DataTemplate.
 		</ScrollView>
 	</StackLayout>
 </ContentPage>
+```
+
+## RepeatableStack
+
+This layout is a StackLayout corresponding to DataTemplate.
+
+### Parameters
+
+* ItemsSource
+* ItemTemplate
+
+### How to write with Xaml
+
+```xml
+<!-- Horizontal -->
+<ScrollView Orientation="Horizontal" HeightRequest="86">
+<al:RepeatableStack Orientation="Horizontal" ItemsSource="{Binding BoxList}" HeightRequest="86">
+	<al:RepeatableStack.ItemTemplate>
+		<DataTemplate>
+			<ContentView BackgroundColor="{Binding Color}" WidthRequest="80" HeightRequest="80" Padding="3" />
+		</DataTemplate>
+	</al:RepeatableStack.ItemTemplate>
+</al:RepeatableStack>
+</ScrollView>
+
+<!-- Vertical -->
+<ScrollView>
+<al:RepeatableStack Orientation="Vertical" ItemsSource="{Binding BoxList}">
+	<al:RepeatableStack.ItemTemplate>
+		<DataTemplate>
+			<ContentView BackgroundColor="{Binding Color}" WidthRequest="80" HeightRequest="80" Padding="3" />
+		</DataTemplate>
+	</al:RepeatableStack.ItemTemplate>
+</al:RepeatableStack>
+</ScrollView>
 ```
 
 ## License

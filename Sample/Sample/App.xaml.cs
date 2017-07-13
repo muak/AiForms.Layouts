@@ -14,7 +14,7 @@ namespace Sample
         {
             InitializeComponent();
 
-           await NavigationService.NavigateAsync("MyNavigationPage/MainPage");
+           await NavigationService.NavigateAsync("MyNavigationPage/SelectPage");
         }
 
         protected override void RegisterTypes()
