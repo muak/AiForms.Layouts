@@ -2,19 +2,23 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>AiForms.Layouts</id>
-        <version>0.0.2</version>
+        <version>0.1.0</version>
         <title>AiForms.Layouts (WrapLayout) for Xamarin.Forms</title>
         <authors>kamu</authors>
         <owners>kamu</owners>
         <projectUrl>https://github.com/muak/AiForms.Layouts</projectUrl>
         <licenseUrl>https://github.com/muak/AiForms.Layouts/blob/master/LICENSE.txt</licenseUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Xamarin.Forms Custom Layouts(WrapLayout,RepeatableWrapLayout)</description>
+        <description>Xamarin.Forms Custom Layouts(WrapLayout,RepeatableWrapLayout,RepeatableStackLayout)</description>
         <summary></summary>
-        <tags>Xamarin.Forms Layout WrapLayout WrapPanel Wrap Repeat ItemTemplate DataTemplate ItemSource</tags>
+        <tags>Xamarin.Forms Layout WrapLayout WrapPanel Wrap Repeat ItemTemplate DataTemplate ItemSource RepeatableStackLayout</tags>
         <language>en-US</language>
 		<releaseNotes>
-		[BugFix]Fixed the problem that it mistakes wrapping position when layout width isn't integer.
+## New Feature
+[RepeatableStack] ... StackLayout corresponding to DataTemplate.
+
+## BugFix
+* Fixed the issue that it crash when using nested DataTemplate.
 		</releaseNotes>
         <dependencies>
             <group targetFramework="portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10">

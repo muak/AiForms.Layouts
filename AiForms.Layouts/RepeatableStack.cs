@@ -130,7 +130,6 @@ namespace AiForms.Layouts
                 return;
             }
 
-
         }
 
         private View CreateChildViewFor(object item)

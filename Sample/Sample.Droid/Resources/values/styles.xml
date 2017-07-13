@@ -27,7 +27,7 @@
 
 
 		<!-- ToolBar BackButton 通常時 -->
-		<item name="android:textColorSecondary">#FFFFFF</item>
+		<item name="android:textColorSecondary">#E0E0E0</item>
 
 	</style>
 	<style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
@@ -54,9 +54,9 @@
         <!-- ToolBarのタイトルテキスト色 -->
         <item name="android:textColorPrimary">#1976D2</item>
         <!-- ToolBar BackButtonでアプリ休止後再開した時の色 -->
-		<item name="android:textColorSecondary">#FFFFFF</item>
+		<item name="android:textColorSecondary">#E0E0E0</item>
 		<!-- Menu Textの色 -->
-		<item name="actionMenuTextColor">#FFFFFF</item>
+		<item name="actionMenuTextColor">#E0E0E0</item>
         <item name="windowActionModeOverlay">true</item>
         <item name="android:windowBackground">@null</item>
     </style>

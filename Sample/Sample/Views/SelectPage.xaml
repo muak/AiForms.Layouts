@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="Sample.Views.SelectPage">
+	
+<StackLayout Spacing="4" Padding="4">
+		<Button Text="RepeatableWrapLayout" Command="{Binding GoToPage}" CommandParameter="MainPage" />
+		<Button Text="RepeatableStack" Command="{Binding GoToPage}" CommandParameter="RepeatableStackPage" />
+</StackLayout>
+
+</ContentPage>
