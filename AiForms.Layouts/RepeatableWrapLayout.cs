@@ -101,7 +101,8 @@ namespace AiForms.Layouts
 
             if (newValueAsEnumerable != null) {
                 foreach (var item in newValueAsEnumerable) {
-                    var view = control.CreateChildViewFor(item);
+                    var view = CreateChildViewFor(control.ItemTemplate, item, control);
+
                     if (control.ItemTapCommand != null) {
                         view.GestureRecognizers.Add(new TapGestureRecognizer {
                             Command = control.ItemTapCommand,
@@ -125,7 +126,7 @@ namespace AiForms.Layouts
                 this.Children.RemoveAt(e.OldStartingIndex);
 
                 var item = e.NewItems[e.NewStartingIndex];
-                var view = CreateChildViewFor(item);
+                var view = CreateChildViewFor(this.ItemTemplate, item, this);
 
                 if (ItemTapCommand != null) {
                     view.GestureRecognizers.Add(new TapGestureRecognizer {
@@ -141,7 +142,7 @@ namespace AiForms.Layouts
                 if (e.NewItems != null) {
                     for (var i = 0; i < e.NewItems.Count; ++i) {
                         var item = e.NewItems[i];
-                        var view = this.CreateChildViewFor(item);
+                        var view = CreateChildViewFor(this.ItemTemplate, item, this);
 
                         if (ItemTapCommand != null) {
                             view.GestureRecognizers.Add(new TapGestureRecognizer {
@@ -180,6 +181,21 @@ namespace AiForms.Layouts
         {
             this.ItemTemplate.SetValue(BindableObject.BindingContextProperty, item);
             return (View)this.ItemTemplate.CreateContent();
+        }
+
+        private static View CreateChildViewFor(DataTemplate template, object item, BindableObject container)
+        {
+            var selector = template as DataTemplateSelector;
+
+            if (selector != null)
+            {
+                template = selector.SelectTemplate(item, container);
+            }
+
+            //Binding context
+            template.SetValue(BindableObject.BindingContextProperty, item);
+
+            return (View)template.CreateContent();
         }
     }
 
