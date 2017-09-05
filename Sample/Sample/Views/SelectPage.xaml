@@ -7,6 +7,8 @@
 <StackLayout Spacing="4" Padding="4">
 		<Button Text="RepeatableWrapLayout" Command="{Binding GoToPage}" CommandParameter="MainPage" />
 		<Button Text="RepeatableStack" Command="{Binding GoToPage}" CommandParameter="RepeatableStackPage" />
+        <Button Text="WrapLayoutWithSelector" Command="{Binding GoToPage}" CommandParameter="WrapLayoutWithSelector" />
+        <Button Text="StackLayoutWithSelector" Command="{Binding GoToPage}" CommandParameter="StackLayoutWithSelector" />
 </StackLayout>
 
 </ContentPage>

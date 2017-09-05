@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:al="clr-namespace:AiForms.Layouts;assembly=AiForms.Layouts"
+    xmlns:local="clr-namespace:Sample.Views;assembly=Sample"
+    x:Class="Sample.Views.StackLayoutWithSelector"
+    Title="RepeatableStack">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="templateA">
+                <StackLayout BackgroundColor="{Binding Color}" WidthRequest="80" HeightRequest="80" Spacing="0" Padding="3">
+                    <Label VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" HorizontalTextAlignment="Center"   
+                            Text="{Binding Name}" FontSize="9" FontAttributes="Bold"
+                        TextColor="{Binding Color,Converter={StaticResource BackForeConv}}"  />
+                    <Label VerticalOptions="End" HorizontalOptions="FillAndExpand" Text="DarkTemplate" TextColor="White" FontSize="8" />
+                </StackLayout>
+            </DataTemplate>
+            <DataTemplate x:Key="templateB">
+                <AbsoluteLayout BackgroundColor="{Binding Color}" WidthRequest="80" HeightRequest="80" Padding="3">
+                    <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="{Binding Name}" FontSize="9" FontAttributes="Bold"
+                    TextColor="{Binding Color,Converter={StaticResource BackForeConv}}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,0.3"  />
+                    <Label HorizontalTextAlignment="End" Text="LightTemplate" TextColor="Black" FontSize="8" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,1,1,0.3" />
+                 </AbsoluteLayout>
+            </DataTemplate>
+            <local:TestSelector x:Key="selector" TemplateA="{StaticResource templateA}" TemplateB="{StaticResource templateB}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+    <StackLayout>
+        <StackLayout Orientation="Horizontal" Spacing="2" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+            <Button Text="Add" Command="{Binding AddCommand}" VerticalOptions="Center" />
+            <Button Text="Del" Command="{Binding DeleteCommand}" VerticalOptions="Center" />
+            <Button Text="Rep" Command="{Binding ReplaceCommand}" VerticalOptions="Center" />
+            <Button Text="Clr" Command="{Binding ClearCommand}" VerticalOptions="Center" />
+        </StackLayout>
+        <ScrollView VerticalOptions="Start" Orientation="Horizontal" HeightRequest="86">
+        <al:RepeatableStack Orientation="Horizontal" ItemsSource="{Binding BoxList}" ItemTemplate="{StaticResource selector}" HeightRequest="86">
+            
+        </al:RepeatableStack>
+        </ScrollView>
+
+
+        <al:RepeatableStack Orientation="Vertical" ItemsSource="{Binding BoxList}" ItemTemplate="{StaticResource selector}">
+            
+        </al:RepeatableStack>
+    </StackLayout>
+    </ScrollView>
+</ContentPage>
