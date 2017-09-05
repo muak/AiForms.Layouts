@@ -9,31 +9,31 @@ using System.Linq;
 
 namespace Sample.ViewModels
 {
-    public class RepeatableStackPageViewModel
+    public class StackLayoutWithSelectorViewModel
     {
-        public ReactiveCommand ClearCommand{get;} = new ReactiveCommand();
-        public ReactiveCommand DeleteCommand{get;} = new ReactiveCommand();
-        public ReactiveCommand ReplaceCommand{get;} = new ReactiveCommand();
-        public ReactiveCommand AddCommand{get;} = new ReactiveCommand();
-        public ObservableCollection<Hoge> BoxList{get;}
+        public ReactiveCommand ClearCommand { get; } = new ReactiveCommand();
+        public ReactiveCommand DeleteCommand { get; } = new ReactiveCommand();
+        public ReactiveCommand ReplaceCommand { get; } = new ReactiveCommand();
+        public ReactiveCommand AddCommand { get; } = new ReactiveCommand();
+        public ObservableCollection<Hoge> BoxList { get; }
 
-        public RepeatableStackPageViewModel(INavigationService navigationService, IPageDialogService pageDlg)
+        public StackLayoutWithSelectorViewModel(INavigationService navigationService, IPageDialogService pageDlg)
         {
             BoxList = new ObservableCollection<Hoge>(Shuffle());
 
-            AddCommand.Subscribe(_=>{
+            AddCommand.Subscribe(_ => {
                 BoxList.Add(GetNextItem());
             });
 
-            DeleteCommand.Subscribe(_=>{
+            DeleteCommand.Subscribe(_ => {
                 BoxList.Remove(BoxList.Last());
             });
 
-            ReplaceCommand.Subscribe(__=>{
-                BoxList[0] = GetNextItem();     
+            ReplaceCommand.Subscribe(__ => {
+                BoxList[0] = GetNextItem();
             });
 
-            ClearCommand.Subscribe(__=>{
+            ClearCommand.Subscribe(__ => {
                 BoxList.Clear();
             });
         }

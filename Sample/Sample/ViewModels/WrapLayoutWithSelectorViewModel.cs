@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -14,12 +14,11 @@ using System.Threading.Tasks;
 
 namespace Sample.ViewModels
 {
-    public class MainPageViewModel : BindableBase, INavigationAware
+    public class WrapLayoutWithSelectorViewModel:BindableBase, INavigationAware
     {
-
         private IPageDialogService _pageDialog;
         private INavigationService _navi;
-        public MainPageViewModel(INavigationService navigationService, IPageDialogService pageDlg)
+        public WrapLayoutWithSelectorViewModel(INavigationService navigationService, IPageDialogService pageDlg)
         {
             _navi = navigationService;
             _pageDialog = pageDlg;
@@ -96,99 +95,117 @@ namespace Sample.ViewModels
 
         private DelegateCommand _AddCommand;
         public DelegateCommand AddCommand {
-            get { return _AddCommand = _AddCommand ?? new DelegateCommand(() => {
-                BoxList.Add(GetNextItem());
-            }); }
+            get {
+                return _AddCommand = _AddCommand ?? new DelegateCommand(() => {
+                    BoxList.Add(GetNextItem());
+                });
+            }
         }
 
         private DelegateCommand _ToggleUniCommand;
         public DelegateCommand ToggleUniCommand {
-            get { return _ToggleUniCommand = _ToggleUniCommand ?? new DelegateCommand(() => {
-                if (UniformColumns == 0) {
-                    UniformColumns = 3;
-                    Title = "WrapLayout(Uniform)";
-                }
-                else {
-                    UniformColumns = 0;
-                    Title = "WrapLayout(Variable)";
-                }
+            get {
+                return _ToggleUniCommand = _ToggleUniCommand ?? new DelegateCommand(() => {
+                    if (UniformColumns == 0) {
+                        UniformColumns = 3;
+                        Title = "WrapLayout(Uniform)";
+                    }
+                    else {
+                        UniformColumns = 0;
+                        Title = "WrapLayout(Variable)";
+                    }
 
 
-            }); }
+                });
+            }
         }
 
         private DelegateCommand _ToggleSquareCommand;
         public DelegateCommand ToggleSquareCommand {
-            get { return _ToggleSquareCommand = _ToggleSquareCommand ?? new DelegateCommand(() => {
-                IsSquare = !IsSquare;
-                if (IsSquare) {
-                    Title += "(Square)";
-                }
+            get {
+                return _ToggleSquareCommand = _ToggleSquareCommand ?? new DelegateCommand(() => {
+                    IsSquare = !IsSquare;
+                    if (IsSquare) {
+                        Title += "(Square)";
+                    }
 
-            }); }
+                });
+            }
         }
 
         private DelegateCommand _CheckCommand;
         public DelegateCommand CheckCommand {
-            get { return _CheckCommand = _CheckCommand ?? new DelegateCommand(() => {
-                var chk = BoxList;
-                var bak = BoxList.ToList();
-                
-                BoxList.Clear();
+            get {
+                return _CheckCommand = _CheckCommand ?? new DelegateCommand(() => {
+                    var chk = BoxList;
+                    var bak = BoxList.ToList();
 
-                //BoxList = new ObservableCollection<Hoge>(bak);
-                //OnPropertyChanged(() => BoxList);
-                foreach (var hoge in bak) {
-                    BoxList.Add(hoge);
-                }
-                
+                    BoxList.Clear();
 
-            }); }
+                    //BoxList = new ObservableCollection<Hoge>(bak);
+                    //OnPropertyChanged(() => BoxList);
+                    foreach (var hoge in bak) {
+                        BoxList.Add(hoge);
+                    }
+
+
+                });
+            }
         }
 
         private DelegateCommand _ShuffleCommand;
         public DelegateCommand ShuffleCommand {
-            get { return _ShuffleCommand = _ShuffleCommand ?? new DelegateCommand(() => {
+            get {
+                return _ShuffleCommand = _ShuffleCommand ?? new DelegateCommand(() => {
 
-                BoxList.Clear();
-                var list = Shuffle();
-                BoxList = new ObservableCollection<Hoge>(list);
-                OnPropertyChanged(() => BoxList);
-                //foreach (var hoge in list) {
-                //    BoxList.Add(hoge);
-                //}
+                    BoxList.Clear();
+                    var list = Shuffle();
+                    BoxList = new ObservableCollection<Hoge>(list);
+                    OnPropertyChanged(() => BoxList);
+                    //foreach (var hoge in list) {
+                    //    BoxList.Add(hoge);
+                    //}
 
-            }); }
+                });
+            }
         }
 
         private DelegateCommand _ClearCommand;
         public DelegateCommand ClearCommand {
-            get { return _ClearCommand = _ClearCommand ?? new DelegateCommand(() => {
-                BoxList.Clear();
-            }); }
+            get {
+                return _ClearCommand = _ClearCommand ?? new DelegateCommand(() => {
+                    BoxList.Clear();
+                });
+            }
         }
 
 
         private DelegateCommand _DeleteCommand;
         public DelegateCommand DeleteCommand {
-            get { return _DeleteCommand = _DeleteCommand ?? new DelegateCommand(() => {
-                BoxList.Remove(BoxList.Last());
-            }); }
+            get {
+                return _DeleteCommand = _DeleteCommand ?? new DelegateCommand(() => {
+                    BoxList.Remove(BoxList.Last());
+                });
+            }
         }
 
         private DelegateCommand _ReplaceCommand;
         public DelegateCommand ReplaceCommand {
-            get { return _ReplaceCommand = _ReplaceCommand ?? new DelegateCommand(() => {
-                BoxList[0] = GetNextItem();               
-            }); }
+            get {
+                return _ReplaceCommand = _ReplaceCommand ?? new DelegateCommand(() => {
+                    BoxList[0] = GetNextItem();
+                });
+            }
         }
 
         private DelegateCommand<object> _TapCommand;
         public DelegateCommand<object> TapCommand {
-            get { return _TapCommand = _TapCommand ?? new DelegateCommand<object>((x) => {
-                var item = x as Hoge;
-                _pageDialog.DisplayAlertAsync("",item.Name,"OK");
-            }); }
+            get {
+                return _TapCommand = _TapCommand ?? new DelegateCommand<object>((x) => {
+                    var item = x as Hoge;
+                    _pageDialog.DisplayAlertAsync("", item.Name, "OK");
+                });
+            }
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)
@@ -208,31 +225,4 @@ namespace Sample.ViewModels
 
     }
 
-    public class Hoge : BindableBase
-    {
-        private string _Name;
-        public string Name {
-            get { return _Name; }
-            set { SetProperty(ref _Name, value); }
-        }
-
-        private Color _Color;
-        public Color Color {
-            get { return _Color; }
-            set { SetProperty(ref _Color, value); }
-        }
-
-        private double _Width;
-        public double Width {
-            get { return _Width; }
-            set { SetProperty(ref _Width, value); }
-        }
-
-        private double _Height;
-        public double Height {
-            get { return _Height; }
-            set { SetProperty(ref _Height, value); }
-        }
-    }
 }
-

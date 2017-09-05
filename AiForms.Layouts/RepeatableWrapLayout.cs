@@ -37,8 +37,8 @@ namespace AiForms.Layouts
                 propertyChanged: (bindable, oldValue, newValue) => {
                     var control = (RepeatableWrapLayout)bindable;
                     //when to occur propertychanged earlier ItemsSource than ItemTemplate, raise ItemsChanged manually
-                    if(newValue != null && control.ItemsSource != null && !control.doneItemSourceChanged){
-                        ItemsChanged(bindable,null,control.ItemsSource);
+                    if (newValue != null && control.ItemsSource != null && !control.doneItemSourceChanged) {
+                        ItemsChanged(bindable, null, control.ItemsSource);
                     }
                 }
             );
@@ -54,7 +54,8 @@ namespace AiForms.Layouts
                 typeof(ICommand),
                 typeof(RepeatableWrapLayout),
                 default(ICommand),
-                defaultBindingMode: BindingMode.OneWay
+                defaultBindingMode: BindingMode.OneWay,
+                propertyChanged: ItemTapCommandChanged
             );
         /// <summary>
         /// Command invoked when it tapped a item.
@@ -66,6 +67,14 @@ namespace AiForms.Layouts
 
         private bool doneItemSourceChanged = false;
 
+        private static void ItemTapCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var control = (RepeatableWrapLayout)bindable;
+            if (oldValue != newValue && control.ItemsSource != null) {
+                UpdateCommand(control);
+            }
+        }
+
         private static void ItemsChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var control = (RepeatableWrapLayout)bindable;
@@ -75,7 +84,7 @@ namespace AiForms.Layouts
                 return;
             }
 
-            control.doneItemSourceChanged = true; 
+            control.doneItemSourceChanged = true;
 
             IEnumerable newValueAsEnumerable;
             try {
@@ -102,19 +111,26 @@ namespace AiForms.Layouts
             if (newValueAsEnumerable != null) {
                 foreach (var item in newValueAsEnumerable) {
                     var view = CreateChildViewFor(control.ItemTemplate, item, control);
-
-                    if (control.ItemTapCommand != null) {
-                        view.GestureRecognizers.Add(new TapGestureRecognizer {
-                            Command = control.ItemTapCommand,
-                            CommandParameter = item,
-                        });
-                    }
                     control.Children.Add(view);
                 }
             }
 
+            if (control.ItemTapCommand != null) {
+                UpdateCommand(control);
+            }
+
             control.UpdateChildrenLayout();
             control.InvalidateLayout();
+        }
+
+        private static void UpdateCommand(RepeatableWrapLayout control)
+        {
+            foreach (var view in control.Children) {
+                view.GestureRecognizers.Add(new TapGestureRecognizer {
+                    Command = control.ItemTapCommand,
+                    CommandParameter = view.BindingContext,
+                });
+            }
         }
 
         private void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

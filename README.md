@@ -65,7 +65,7 @@ This Layout performs wrapping on the boundaries.
 
 ## RepeatableWrapLayout
 
-This Layout is WrapLayout corresponding to DataTemplate.
+This Layout is WrapLayout corresponding to DataTemplate and DataTemplateSelector.
 
 ### Parameters
 
@@ -105,7 +105,7 @@ This Layout is WrapLayout corresponding to DataTemplate.
 
 ## RepeatableStack
 
-This layout is a StackLayout corresponding to DataTemplate.
+This layout is a StackLayout corresponding to DataTemplate and DataTemplateSelector.
 
 ### Parameters
 
@@ -137,6 +137,10 @@ This layout is a StackLayout corresponding to DataTemplate.
 </al:RepeatableStack>
 </ScrollView>
 ```
+## Contributors
+
+* [predalpha](https://github.com/predalpha)
+
 
 ## License
 

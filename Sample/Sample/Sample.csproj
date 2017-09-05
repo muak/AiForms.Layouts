@@ -53,6 +53,15 @@
       <DependentUpon>RepeatableStackPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\RepeatableStackPageViewModel.cs" />
+    <Compile Include="Views\WrapLayoutWithSelector.xaml.cs">
+      <DependentUpon>WrapLayoutWithSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\WrapLayoutWithSelectorViewModel.cs" />
+    <Compile Include="Views\TestSelector.cs" />
+    <Compile Include="Views\StackLayoutWithSelector.xaml.cs">
+      <DependentUpon>StackLayoutWithSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\StackLayoutWithSelectorViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">
@@ -74,6 +83,12 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\RepeatableStackPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\WrapLayoutWithSelector.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\StackLayoutWithSelector.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+        xmlns:w="clr-namespace:AiForms.Layouts;assembly=AiForms.Layouts"
+        xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" 
+        xmlns:local="clr-namespace:Sample.Views;assembly=Sample"
+        prism:ViewModelLocator.AutowireViewModel="True" 
+        BackgroundColor="White"
+        x:Class="Sample.Views.WrapLayoutWithSelector" Title="{Binding Title}"
+        >
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="templateA">
+                <StackLayout BackgroundColor="{Binding Color}" WidthRequest="{Binding Width}" HeightRequest="{Binding Height}" Spacing="0" Padding="3">
+                    <Label VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" HorizontalTextAlignment="Center"   
+                            Text="{Binding Name}" FontSize="9" FontAttributes="Bold"
+                        TextColor="{Binding Color,Converter={StaticResource BackForeConv}}"  />
+                    <Label VerticalOptions="End" HorizontalOptions="FillAndExpand" Text="DarkTemplate" TextColor="White" FontSize="8" />
+                </StackLayout>
+            </DataTemplate>
+            <DataTemplate x:Key="templateB">
+                <AbsoluteLayout BackgroundColor="{Binding Color}" WidthRequest="{Binding Width}" HeightRequest="{Binding Height}" Padding="3">
+                    <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="{Binding Name}" FontSize="9" FontAttributes="Bold"
+                    TextColor="{Binding Color,Converter={StaticResource BackForeConv}}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,0.3"  />
+                    <Label HorizontalTextAlignment="End" Text="LightTemplate" TextColor="Black" FontSize="8" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,1,1,0.3" />
+                 </AbsoluteLayout>
+            </DataTemplate>
+            <local:TestSelector x:Key="selector" TemplateA="{StaticResource templateA}" TemplateB="{StaticResource templateB}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout Spacing="3" Margin="6" Padding="0"  >
+        <StackLayout Orientation="Horizontal" Spacing="2" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+            <Button Text="Add" Command="{Binding AddCommand}" VerticalOptions="Center" />
+            <Button Text="Del" Command="{Binding DeleteCommand}" VerticalOptions="Center" />
+            <Button Text="Rep" Command="{Binding ReplaceCommand}" VerticalOptions="Center" />
+            <Button Text="Clr" Command="{Binding ClearCommand}" VerticalOptions="Center" />
+            <Button Text="Uni" Command="{Binding ToggleUniCommand}" VerticalOptions="Center" />
+            <Label Text="Square" VerticalOptions="Center" FontSize="12" HorizontalTextAlignment="End" HorizontalOptions="FillAndExpand" />
+            <Switch IsToggled="{Binding IsSquare}" VerticalOptions="Center" HorizontalOptions="End" />
+        </StackLayout>
+        <ScrollView HorizontalOptions="FillAndExpand">
+        <w:RepeatableWrapLayout ItemTapCommand="{Binding TapCommand}" ItemsSource="{Binding BoxList}" 
+                BackgroundColor="#EEEEEE" Padding="0" Margin="4" ItemTemplate="{StaticResource selector}"
+                Spacing="3" UniformColumns="{Binding UniformColumns}" IsSquare="{Binding IsSquare}" 
+                >
+        </w:RepeatableWrapLayout>
+        </ScrollView>
+
+    </StackLayout>
+</ContentPage>
