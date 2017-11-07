@@ -26,8 +26,26 @@ https://twitter.com/muak_x/status/830061279330996224
 Install-Package AiForms.Layouts
 ```
 
-All you need to do is installing to PCL project.<br>
-You need not to install this nuget package to each platform project.
+~~All you need to do is installing to PCL project.~~  
+~~You need not to install this nuget package to each platform project.~~
+
+You need to install this package to .NETStandard / PCL project and **each platform project**.
+
+### iOS
+
+If you don't use XamlCompilationOptions.Compile, need to write following code in AppDelegate.cs; Otherwise needn't.
+
+```cs
+public override bool FinishedLaunching(UIApplication app, NSDictionary options) {
+    global::Xamarin.Forms.Forms.Init();
+
+    AiForms.Layouts.LayoutsInit.Init();  //need to write here
+
+    LoadApplication(new App(new iOSInitializer()));
+
+    return base.FinishedLaunching(app, options);
+}
+```
 
 ## WrapLayout
 
