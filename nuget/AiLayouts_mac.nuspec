@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>AiForms.Layouts</id>
-        <version>1.0.0</version>
+        <version>1.0.2-pre</version>
         <title>AiForms.Layouts (WrapLayout) for Xamarin.Forms</title>
         <authors>kamu</authors>
         <owners>kamu</owners>
@@ -14,19 +14,23 @@
         <tags>Xamarin.Forms Layout WrapLayout WrapPanel Wrap Repeat ItemTemplate DataTemplate ItemSource RepeatableStackLayout</tags>
         <language>en-US</language>
 		<releaseNotes>
-## New Feature
-RepeatableWrapLayout and RepeatableStack have been corresponded to DataTemplateSelector. (pull request#8)
+* Support .NETStandard
 
-## BugFix
-[RepeatableWrapLayout] Fixed the issue that ItemTapCommand don't work depending on parameters binding order.(issue#7)
+## Notes
+Since this version, you need to install each platform project too.
 		</releaseNotes>
         <dependencies>
+			<group targetFramework="netstandard1.1">
+                <dependency id="Xamarin.Forms" version="2.4.0" />
+            </group>
             <group targetFramework="portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10">
-                <dependency id="Xamarin.Forms" version="2.3.3" />
+                <dependency id="Xamarin.Forms" version="2.4.0" />
             </group>
         </dependencies>
     </metadata>
     <files>
+		<!-- .netstandard 1.1 -->
+        <file src="../AiForms.Layouts/bin/Release/AiForms.Layouts.dll" target="lib/netstandard1.1" />
         <!-- PCL -->
         <file src="../AiForms.Layouts/bin/Release/AiForms.Layouts.dll" target="lib/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10" />
     </files>
