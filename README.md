@@ -22,6 +22,8 @@ https://twitter.com/muak_x/status/830061279330996224
 
 ## Nuget Installation
 
+[https://www.nuget.org/packages/AiForms.Layouts/](https://www.nuget.org/packages/AiForms.Layouts/)
+
 ```bash
 Install-Package AiForms.Layouts
 ```
