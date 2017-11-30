@@ -15,6 +15,7 @@ namespace Sample.Droid
 
             ToolbarResource = Resource.Layout.toolbar;
 
+            global::Xamarin.Forms.Forms.SetFlags("FastRenderers_Experimental");
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
             LoadApplication(new App(new AndroidInitializer()));
