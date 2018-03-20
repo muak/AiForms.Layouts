@@ -72,6 +72,10 @@ namespace AiForms.Layouts
             double internalWidth = double.IsPositiveInfinity(widthConstraint) ? double.PositiveInfinity : Math.Max(0, widthConstraint);
             double internalHeight = double.IsPositiveInfinity(heightConstraint) ? double.PositiveInfinity : Math.Max(0, heightConstraint);
 
+            if (double.IsPositiveInfinity(widthConstraint) && double.IsPositiveInfinity(heightConstraint)) {
+                return new SizeRequest(Size.Zero, Size.Zero);
+            }
+
             return UniformColumns > 0 ? UniformMeasureAndLayout(internalWidth, internalHeight) :
                                         VariableMeasureAndLayout(internalWidth, internalHeight);
 
@@ -144,7 +148,6 @@ namespace AiForms.Layouts
 
         private SizeRequest VariableMeasureAndLayout(double widthConstraint, double heightConstraint, bool doLayout = false, double x = 0, double y = 0)
         {
-
             double totalWidth = 0;
             double totalHeight = 0;
             double rowHeight = 0;

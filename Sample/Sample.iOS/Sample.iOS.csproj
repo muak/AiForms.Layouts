@@ -131,9 +131,6 @@
     <Reference Include="Prism.Unity.Forms">
       <HintPath>..\packages\Prism.Unity.Forms.6.3.0\lib\Xamarin.iOS1.0\Prism.Unity.Forms.dll</HintPath>
     </Reference>
-    <Reference Include="AiForms.Layouts">
-      <HintPath>..\packages\AiForms.Layouts.1.0.3\lib\netstandard1.1\AiForms.Layouts.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ThemeSample\ThemeSample.csproj">
@@ -143,6 +140,10 @@
     <ProjectReference Include="..\Sample\Sample.csproj">
       <Project>{9A48D096-CB04-4932-9538-BBFB58AD7052}</Project>
       <Name>Sample</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AiForms.Layouts\AiForms.Layouts.csproj">
+      <Project>{921EC4B4-C014-4C1D-8BF3-ED28838B22E5}</Project>
+      <Name>AiForms.Layouts</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

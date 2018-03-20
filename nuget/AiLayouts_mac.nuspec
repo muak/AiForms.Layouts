@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>AiForms.Layouts</id>
-        <version>1.0.3</version>
+        <version>1.0.4</version>
         <title>AiForms.Layouts (WrapLayout) for Xamarin.Forms</title>
         <authors>kamu</authors>
         <owners>kamu</owners>
@@ -14,10 +14,9 @@
         <tags>Xamarin.Forms Layout WrapLayout WrapPanel Wrap Repeat ItemTemplate DataTemplate ItemSource RepeatableStackLayout</tags>
         <language>en-US</language>
 		<releaseNotes>
-* Support .NETStandard
+## Bugfix
 
-## Notes
-Since this version, you need to install each platform project too.
+* Crash in Nested Grid (issue NaN Exception #15)
 		</releaseNotes>
         <dependencies>
 			<group targetFramework="netstandard1.1">
