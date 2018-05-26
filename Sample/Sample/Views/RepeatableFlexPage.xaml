@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:al="clr-namespace:AiForms.Layouts;assembly=AiForms.Layouts"
+    x:Class="Sample.Views.RepeatableFlexPage"
+    Title="RepeatableFlex">
+    
+    <StackLayout>
+        <FlexLayout Direction="Row" Wrap="Wrap" AlignItems="Start" JustifyContent="SpaceBetween">
+            <Button Text="Add" Command="{Binding AddCommand}" />
+            <Button Text="Del" Command="{Binding DeleteCommand}" />
+            <Button Text="Rep" Command="{Binding ReplaceCommand}" />
+            <Button Text="Clr" Command="{Binding ClearCommand}" />
+            <Button Text="Row" TextColor="{Binding DirectionColor[0].Value}" Command="{Binding DirectionCommand}" CommandParameter="0"  />
+            <Button Text="Column" TextColor="{Binding DirectionColor[2].Value}" Command="{Binding DirectionCommand}" CommandParameter="2"  />
+            <Button Text="A_Stretch" TextColor="{Binding AColor[1].Value}" Command="{Binding AlignItemsCommand}" CommandParameter="1"  />
+            <Button Text="A_Start" TextColor="{Binding AColor[3].Value}" Command="{Binding AlignItemsCommand}" CommandParameter="3"  />
+            <Button Text="A_Center" TextColor="{Binding AColor[2].Value}" Command="{Binding AlignItemsCommand}" CommandParameter="2" />
+            <Button Text="A_End" TextColor="{Binding AColor[4].Value}" Command="{Binding AlignItemsCommand}" CommandParameter="4"  />
+            <Button Text="J_Start" TextColor="{Binding JColor[3].Value}" Command="{Binding JustifyContentCommand}" CommandParameter="3"  />
+            <Button Text="J_Center" TextColor="{Binding JColor[2].Value}" Command="{Binding JustifyContentCommand}" CommandParameter="2" />
+            <Button Text="J_End"  TextColor="{Binding JColor[4].Value}" Command="{Binding JustifyContentCommand}" CommandParameter="4"  />
+            <Button Text="J_Around" TextColor="{Binding JColor[6].Value}" Command="{Binding JustifyContentCommand}" CommandParameter="6"  />
+            <Button Text="J_Between" TextColor="{Binding JColor[5].Value}" Command="{Binding JustifyContentCommand}" CommandParameter="5"  />
+            <Button Text="NoWrap" TextColor="{Binding WrapColor[0].Value}" Command="{Binding WrapCommand}" CommandParameter="0"  />
+            <Button Text="Wrap" TextColor="{Binding WrapColor[1].Value}" Command="{Binding WrapCommand}" CommandParameter="1"  />
+        </FlexLayout>
+        
+        <ScrollView VerticalOptions="FillAndExpand" Orientation="{Binding ScrollDirection.Value}">
+        <al:RepeatableFlex Direction="{Binding FlexDirection.Value}" AlignItems="{Binding FlexAlignItems.Value}" 
+                           JustifyContent="{Binding FlexJustify.Value}" Wrap="{Binding FlexWrap.Value}" AlignContent="Start"
+                           ItemsSource="{Binding BoxList}" x:Name="list" >
+            <al:RepeatableFlex.ItemTemplate>
+                <DataTemplate>
+                    <ContentView BackgroundColor="{Binding Color}" WidthRequest="80" HeightRequest="80" Padding="3">
+                        <Label  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"   
+                                Text="{Binding Name}" FontSize="9" FontAttributes="Bold"
+                            TextColor="{Binding Color,Converter={StaticResource BackForeConv}}">   
+                        </Label>
+                    </ContentView>
+                </DataTemplate>
+            </al:RepeatableFlex.ItemTemplate>
+        </al:RepeatableFlex>
+        </ScrollView>
+    </StackLayout>
+</ContentPage>

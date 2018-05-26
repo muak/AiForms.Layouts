@@ -1,107 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9A48D096-CB04-4932-9538-BBFB58AD7052}</ProjectGuid>
-    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <OutputType>Library</OutputType>
-    <RootNamespace>Sample</RootNamespace>
-    <AssemblyName>Sample</AssemblyName>
-    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\MainPageViewModel.cs" />
-    <Compile Include="AppTheme.xaml.cs">
-      <DependentUpon>AppTheme.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MyNavigationPage.xaml.cs">
-      <DependentUpon>MyNavigationPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="OtherTheme.xaml.cs">
-      <DependentUpon>OtherTheme.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="BackForeColorConverter.cs" />
-    <Compile Include="Views\SelectPage.xaml.cs">
-      <DependentUpon>SelectPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\SelectPageViewModel.cs" />
-    <Compile Include="Views\RepeatableStackPage.xaml.cs">
-      <DependentUpon>RepeatableStackPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\RepeatableStackPageViewModel.cs" />
-    <Compile Include="Views\WrapLayoutWithSelector.xaml.cs">
-      <DependentUpon>WrapLayoutWithSelector.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\WrapLayoutWithSelectorViewModel.cs" />
-    <Compile Include="Views\TestSelector.cs" />
-    <Compile Include="Views\StackLayoutWithSelector.xaml.cs">
-      <DependentUpon>StackLayoutWithSelector.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\StackLayoutWithSelectorViewModel.cs" />
+    <PackageReference Include="Prism.Unity.Forms" Version="7.0.0.396" />
+    <PackageReference Include="ReactiveProperty" Version="4.2.2" />
+    <PackageReference Include="Xamarin.Forms" Version="3.0.0.482510" />
+    <PackageReference Include="AiForms.Effects" Version="1.3.1" />
+    <PackageReference Include="AiForms.Layouts" Version="1.1.0" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="App.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\MainPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AppTheme.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\MyNavigationPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OtherTheme.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\SelectPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\RepeatableStackPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\WrapLayoutWithSelector.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\StackLayoutWithSelector.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="project.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\AiForms.Layouts\AiForms.Layouts.csproj">
-      <Project>{921EC4B4-C014-4C1D-8BF3-ED28838B22E5}</Project>
-      <Name>AiForms.Layouts</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
-  <Import Project="..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
 </Project>
