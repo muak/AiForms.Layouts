@@ -2,6 +2,7 @@
 <ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms" 
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 		xmlns:cv="clr-namespace:Sample;assembly=Sample"
+        xmlns:af="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
 		x:Class="Sample.Resources.AppTheme">
 	<cv:BackForeColorConverter x:Key="BackForeConv" />
 	<!-- アプリ全体の背景色 -->
@@ -19,11 +20,9 @@
 	<!-- ボタンとかのフォントサイズ -->
 	<x:Double x:Key="ObjectFontSize">28</x:Double>
 	<Style TargetType="Button">
-		<Setter Property="WidthRequest">
-			<Setter.Value>
-				<OnPlatform x:TypeArguments="x:Double" iOS="-1" Android="50" />
-			</Setter.Value>
-		</Setter>
+        <Setter Property="af:ToFlatButton.On" Value="true" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="HeightRequest" Value="20" />
 		<Setter Property="FontSize" Value="12" />
 	</Style>
 </ResourceDictionary>

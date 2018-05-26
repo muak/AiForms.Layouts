@@ -3,12 +3,21 @@
 	xmlns="http://xamarin.com/schemas/2014/forms" 
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 	x:Class="Sample.Views.SelectPage">
+<!--<ContentPage.Resources>
+    <ResourceDictionary>
+        <Style TargetType="Button">
+            <Setter Property="WidthRequest" Value="250" />
+        </Style>
+    </ResourceDictionary>
+</ContentPage.Resources>-->
 	
-<StackLayout Spacing="4" Padding="4">
-		<Button Text="RepeatableWrapLayout" Command="{Binding GoToPage}" CommandParameter="MainPage" />
-		<Button Text="RepeatableStack" Command="{Binding GoToPage}" CommandParameter="RepeatableStackPage" />
-        <Button Text="WrapLayoutWithSelector" Command="{Binding GoToPage}" CommandParameter="WrapLayoutWithSelector" />
-        <Button Text="StackLayoutWithSelector" Command="{Binding GoToPage}" CommandParameter="StackLayoutWithSelector" />
-</StackLayout>
+<FlexLayout Direction="Column" AlignItems="Center" JustifyContent="SpaceBetween">
+	<Button WidthRequest="250" HeightRequest="60" Text="RepeatableWrapLayout" Command="{Binding GoToPage}" CommandParameter="MainPage" />
+	<Button WidthRequest="250" HeightRequest="60" Text="RepeatableStack" Command="{Binding GoToPage}" CommandParameter="RepeatableStackPage" />
+    <Button WidthRequest="250" HeightRequest="60" Text="RepeatableFlex" Command="{Binding GoToPage}" CommandParameter="RepeatableFlexPage" />
+    <Button WidthRequest="250" HeightRequest="60" Text="WrapLayoutWithSelector" Command="{Binding GoToPage}" CommandParameter="WrapLayoutWithSelector" />
+    <Button WidthRequest="250" HeightRequest="60" Text="StackLayoutWithSelector" Command="{Binding GoToPage}" CommandParameter="StackLayoutWithSelector" />
+    <Button WidthRequest="250" HeightRequest="60" Text="FlexLayoutWithSelector" Command="{Binding GoToPage}" CommandParameter="FlexLayoutWithSelector" />
+</FlexLayout>
 
 </ContentPage>

@@ -2,35 +2,40 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>AiForms.Layouts</id>
-        <version>1.0.4</version>
+        <version>1.1.0</version>
         <title>AiForms.Layouts (WrapLayout) for Xamarin.Forms</title>
         <authors>kamu</authors>
         <owners>kamu</owners>
         <projectUrl>https://github.com/muak/AiForms.Layouts</projectUrl>
         <licenseUrl>https://github.com/muak/AiForms.Layouts/blob/master/LICENSE.txt</licenseUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Xamarin.Forms Custom Layouts(WrapLayout,RepeatableWrapLayout,RepeatableStackLayout)</description>
+        <description>Xamarin.Forms Custom Layouts(WrapLayout, RepeatableWrapLayout, RepeatableStackLayout, RepeatableFlexLayout)</description>
         <summary></summary>
-        <tags>Xamarin.Forms Layout WrapLayout WrapPanel Wrap Repeat ItemTemplate DataTemplate ItemSource RepeatableStackLayout</tags>
+        <tags>Xamarin.Forms Layout WrapLayout WrapPanel Wrap Repeat ItemTemplate DataTemplate ItemSource RepeatableStackLayout RepeatableFlexLayout FlexLayout</tags>
         <language>en-US</language>
 		<releaseNotes>
-## Bugfix
+## New features
 
-* Crash in Nested Grid (issue NaN Exception #15)
+* RepeatableFlex ... A FlexLayout corresponding to DataTemplate and DataTemplateSelector.
+
+## Others
+
+* Support .NETStandard 2.0
+* Minimum Xamarin.Forms version >= 3.0.0.482510
 		</releaseNotes>
         <dependencies>
-			<group targetFramework="netstandard1.1">
-                <dependency id="Xamarin.Forms" version="2.4.0" />
+			<group targetFramework="netstandard2.0">
+                <dependency id="Xamarin.Forms" version="3.0.0.482510" />
             </group>
             <group targetFramework="portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10">
-                <dependency id="Xamarin.Forms" version="2.4.0" />
+                <dependency id="Xamarin.Forms" version="3.0.0.482510" />
             </group>
         </dependencies>
     </metadata>
     <files>
-		<!-- .netstandard 1.1 -->
-        <file src="../AiForms.Layouts/bin/Release/AiForms.Layouts.dll" target="lib/netstandard1.1" />
+		<!-- .netstandard 2.0 -->
+        <file src="../AiForms.Layouts/bin/Release/netstandard2.0/AiForms.Layouts.dll" target="lib/netstandard2.0" />
         <!-- PCL -->
-        <file src="../AiForms.Layouts/bin/Release/AiForms.Layouts.dll" target="lib/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10" />
+        <file src="../AiForms.Layouts/bin/Release/netstandard2.0/AiForms.Layouts.dll" target="lib/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10" />
     </files>
 </package>

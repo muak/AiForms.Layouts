@@ -9,12 +9,12 @@ This is a collection of  Xamarin.Forms custom layouts
 
 ## Features
 
+* [RepeatableFlex](#repeatableflex)
 * [WrapLayout](#wraplayout)
 * [RepeatableWrapLayout](#repeatablewraplayout)
 * [RepeatableStack](#repeatablestack)
 
 <img src="images/1.png" width=200 /><img src="images/2.png" width=200 /><img src="images/3.png" width=200 />
-
 
 ## Demo
 
@@ -27,9 +27,6 @@ https://twitter.com/muak_x/status/830061279330996224
 ```bash
 Install-Package AiForms.Layouts
 ```
-
-~~All you need to do is installing to PCL project.~~  
-~~You need not to install this nuget package to each platform project.~~
 
 You need to install this package to .NETStandard / PCL project and **each platform project**.
 
@@ -49,9 +46,34 @@ public override bool FinishedLaunching(UIApplication app, NSDictionary options) 
 }
 ```
 
+## RepeatableFlex
+
+This layout is a FlexLayout corresponding to DataTemplate and DataTemplateSelector.
+
+### Parameters
+
+* ItemsSource
+* ItemTemplate
+
+### How to write with Xaml
+
+```xml
+<ScrollView Orientation="Virtical" HeightRequest="86">
+<al:RepeatableFlex Direction="Row" Wrap="Wrap" AlignItems="Start" JustifyContent="Start" ItemsSource="{Binding BoxList}">
+	<al:RepeatableFlex.ItemTemplate>
+		<DataTemplate>
+			<ContentView BackgroundColor="{Binding Color}" WidthRequest="80" HeightRequest="80" Padding="3" />
+		</DataTemplate>
+	</al:RepeatableFlex.ItemTemplate>
+</al:RepeatableFlex>
+</ScrollView>
+```
+
 ## WrapLayout
 
 This Layout performs wrapping on the boundaries.
+
+_By Flex Layout having come, there is seldom opportunity using this layout. But it can be used when you want to arrange uniformly each items depending on screen width or make it square._
 
 ### Parameters
 
