@@ -109,6 +109,8 @@ _By Flex Layout having come, there is seldom opportunity using this layout. But 
 
 This Layout is WrapLayout corresponding to DataTemplate and DataTemplateSelector.
 
+> If a lot of items are arranged, you should use [CollectionView](https://github.com/muak/AiForms.CollectionView) that can recycle items.
+
 ### Parameters
 
 * ItemTapCommandProperty
